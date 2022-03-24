@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300&display=swap');
 :root {
   --offset: 20vw;
-  --move-initial: calc(-50% + var(--offset));
-  --move-final: calc(-75% + var(--offset));
+  --move-initial: calc(-40% + var(--offset));
+  --move-final: calc(-70% + var(--offset));
 }
 .marqueeContainer {
   position: relative;

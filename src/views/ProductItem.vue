@@ -150,8 +150,8 @@
           所以，您所退回的商品必須是包裝完整、保存良好的狀態。
         </p>
       </div>
-      <hr>
     </div>
+    <hr>
   </div>
   <div class="container custom-container-width mt-5 mb-7">
     <div class="row mx-4">
