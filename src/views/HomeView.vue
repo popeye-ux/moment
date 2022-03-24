@@ -176,7 +176,7 @@ export default {
   },
   methods: {
     getData () {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products`
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       this.$http.get(url).then((response) => {
         this.products = response.data.products
         // console.log(this.productDetail.id)
