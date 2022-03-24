@@ -1,0 +1,200 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables"; //自定義
+@import "~bootstrap/scss/bootstrap";
+// * {
+//   border: 1px solid red;
+// }
+body {
+  background: #f4f5f6;
+  color: #141414;
+  letter-spacing: 1px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; //body設為100%的視窗高
+}
+.footer {
+  margin-top: auto; //利用flex特性，margin-top設auto後會自動計算上面有多少空間而將元素往下推移
+  height: 200px;
+}
+.login {
+  color:#7383a3;
+}
+.login:hover {
+  color:#dcdcdc;
+}
+.container.custom-container-width {
+  max-width: 1200px; // 最後內容寬會是 980px
+}
+//nav-bar
+$bg: #141414;
+$text: rgba(255, 255, 255, 0.7);
+$hover: darken($bg, 10%);
+.bottom-line {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  line-height: 20px;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    transition: transform 0.5s ease;
+  }
+}
+.effect-1 {
+  padding-top: 10px;
+  &:before {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: $hover;
+    transform: scaleX(0);
+  }
+  &:hover:before {
+    transform: scaleX(1);
+  }
+}
+.nav-link.active {
+  font-weight: 900;
+  &:before {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: $hover;
+    transform: scaleX(1);
+  }
+}
+.headPic {
+  background-image: url(./assets/img/about-head.jpg);
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+}
+.headPic-webstore {
+  background-image: url(./assets/img/webstore-head.jpg);
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+}
+.headPic-faq {
+  background-image: url(./assets/img/faq-head.jpg);
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+}
+.headPic-cart {
+  background-image: url(./assets/img/cart-head.jpg);
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+}
+.home-foot {
+  background-image: url(./assets/img/home-foot.jpg);
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+} 
+.head-title {
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 900;
+  position: relative;
+}
+// .head-title:before, .head-title:after {
+//   content: "";
+//   height: 3px;
+//   background: #ffc62d;
+//   top: 50%;
+//   width: 55%;
+//   position: absolute;
+// }
+// .head-title:before {  
+//   left: -70%;
+// }
+// .head-title:after {  
+//   right: -70%;
+// }
+// homepage
+.main-bg {
+  background-image: url(./assets/img/index_visual.webp);
+  height: 600px
+}
+// 產品頁
+.product-title {
+  min-height: 2.5rem;
+}
+
+.add-btn {
+  color: #fff;
+  background-color: #141414;
+  border: #0f1d40 1px solid;
+  position: relative;
+  z-index: 1;
+}
+.add-btn:after {
+  content: "";
+  position: absolute;
+  transition: transform 0.5s ease;
+  z-index: 2;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #ffc62d;
+  transform: scaleX(0);
+}
+.add-btn:hover:after {
+  transform: scaleX(1);
+}
+.add-btn:hover {
+  color: #000;
+}
+
+.more-btn {
+  color: #000;
+  border: #848484 1px solid;
+  position: relative;
+  z-index: 1;
+}
+.more-btn:after {
+  content: "";
+  position: absolute;
+  transition: transform 0.5s ease;
+  z-index: 2;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #dcdcdc;
+  transform: scaleX(0);
+}
+.more-btn:hover:after {
+  transform: scaleX(1);
+}
+.more-btn:hover {
+  color: #000;
+}
+.card:hover {
+  box-shadow: 0px 0.3px 2.2px rgba(0, 0, 0, 0.02),
+    0px 0.7px 5.3px rgba(0, 0, 0, 0.028), 0px 1.3px 10px rgba(0, 0, 0, 0.035),
+    0px 2.2px 17.9px rgba(0, 0, 0, 0.042), 0px 4.2px 33.4px rgba(0, 0, 0, 0.05),
+    0px 10px 80px rgba(0, 0, 0, 0.07);
+}
+// 訂單
+.check-step {
+  height: 150px;
+  background: #ebedee;
+}
+.check-step-finished {
+  background: #6b7288;
+  color: #ffc62d;
+}
+.check-step-icon {
+  font-size: 3rem;
+}
