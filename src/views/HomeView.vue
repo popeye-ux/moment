@@ -52,7 +52,7 @@
      data-aos-duration="1500">
         <img class="img-fluid" src="@/assets/img/home-img.jpg" alt="牽手圖"/>
       </div>
-      <div class="col-12 col-lg-6 mb-lg-7 px-4 mb-7 ps-lg-5" data-aos="fade-left" data-aos-easing="linear"
+      <div class="col-12 col-lg-6 mb-lg-7 px-4 mb-7 ps-lg-5" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
         <small>CONCEPT</small>
         <h2 class="mt-3 mb-lg-7 mb-5">在乎您對時光的珍惜</h2>
@@ -65,7 +65,7 @@
           ><div class="more-circle">more</div></router-link
         >
       </div>
-      <div class="col-12 col-lg-6 mb-7 mb-lg-7 pe-lg-5 px-4 order-2 order-lg-1" data-aos="fade-right" data-aos-easing="linear"
+      <div class="col-12 col-lg-6 mb-7 mb-lg-7 pe-lg-5 px-4 order-2 order-lg-1" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
         <small>Excellent Art</small>
         <h2 class="mt-3 mb-lg-7 mb-5">時光工匠的競技場</h2>
@@ -94,7 +94,7 @@
           alt="手錶圖"
         />
       </div>
-      <div class="col-12 col-lg-6 mb-lg-7 mb-3 px-4 ps-lg-5 order-4" data-aos="fade-left" data-aos-easing="linear"
+      <div class="col-12 col-lg-6 mb-lg-7 mb-3 px-4 ps-lg-5 order-4" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
         <small>Delivery</small>
         <h2 class="mt-3 mb-lg-7 mb-5">時光不待人</h2>
@@ -185,7 +185,7 @@ export default {
             return item
           }
         })
-        console.log(this.recommendLike)
+        // console.log(this.recommendLike)
       })
     },
     submitEmail () {
@@ -201,7 +201,7 @@ export default {
   mounted () {
     // axios -> this.$http
     // console.log(this.$http.get)
-    console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
+    // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
     this.getData()
     window.scroll(0, 0)
     AOS.init()

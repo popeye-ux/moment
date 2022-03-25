@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="container mt-7 mb-5">
-    <div class="row px-7 mb-5">
+    <div class="row px-1 px-lg-7 mb-5">
       <h2>商品購物須知</h2>
       <div class="accordion" id="accordionExampleA">
         <div class="accordion-item">
@@ -89,7 +89,7 @@
         </div>
       </div>
     </div>
-    <div class="row px-7 mb-5">
+    <div class="row px-1 px-lg-7 mb-5">
       <h2>查詢配送/回收</h2>
       <div class="accordion" id="accordionExample1">
         <div class="accordion-item">
@@ -264,7 +264,7 @@
         </div>
       </div>
     </div>
-    <div class="row px-7 mb-5">
+    <div class="row px-1 px-lg-7 mb-5">
       <h2>訂單資料異動</h2>
       <div class="accordion" id="accordionExample3">
         <div class="accordion-item">
@@ -341,7 +341,7 @@
         </div>
       </div>
     </div>
-    <div class="row px-7 mb-5">
+    <div class="row px-1 px-lg-7 mb-5">
       <h2>網站操作方式</h2>
       <div class="accordion" id="accordionExample4">
         <div class="accordion-item">

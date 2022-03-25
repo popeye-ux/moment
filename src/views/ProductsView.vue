@@ -95,7 +95,7 @@ export default {
       this.$http
         .post(url, { data })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (data.qty <= 0) {
             alert('數量必須大於0')
             // this.isLoadingItem = '';
