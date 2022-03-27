@@ -154,22 +154,22 @@ export default {
   },
   watch: {
     is_paid () {
-      console.log(this.is_paid)
+      // console.log(this.is_paid)
       this.is_paid = this.order.is_paid
     }
   },
   methods: {
     getOrder () {
       const { id } = this.$route.params
-      console.log(id)
+      // console.log(id)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
       this.$http.get(url).then((res) => {
-        console.log(res)
+        // console.log(res)
         this.order = res.data.order
         this.user = res.data.order.user
         this.products = res.data.order.products
-        console.log(this.products)
-        console.log(this.order)
+        // console.log(this.products)
+        // console.log(this.order)
       })
     },
     getDate (timestamp) {

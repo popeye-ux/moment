@@ -270,7 +270,7 @@ export default {
       this.$http
         .post(url, { data })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.isLoadingItem = ''
           this.showAlert({ icon: 'success', title: `${res.data.message}` })
           emitter.emit('get-cart')

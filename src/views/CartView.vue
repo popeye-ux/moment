@@ -26,8 +26,8 @@
             <th style="width: 150px" class="d-none d-sm-table-cell"></th>
             <th class="text-start">產品名稱</th>
             <th class="text-center" style="width: 50px">數量</th>
-            <th class="text-center">單價</th>
-            <th class="text-end">合計</th>
+            <!-- <th class="text-center">單價</th> -->
+            <th class="text-center">價格</th>
             <th class="text-center">刪除</th>
           </tr>
         </thead>
@@ -37,7 +37,8 @@
             <tr v-for="item in cartData.carts" :key="item.id">
               <!-- 商品圖 -->
               <td class="text-center d-none d-sm-table-cell">
-                <div class="d-none d-sm-block"
+                <div
+                  class="d-none d-sm-block"
                   style="
                     height: 150px;
                     background-size: cover;
@@ -68,6 +69,7 @@
                       v-model="item.qty"
                       @change="updateCartItem(item)"
                       :disabled="isLoadingItem === item.id"
+                      style="width:70px;"
                     >
                       <option
                         :value="num"
@@ -84,16 +86,20 @@
                 </div>
               </td>
               <!-- 商品單價 -->
-              <td class="text-center">
+              <!-- <td class="text-center"> -->
                 <!-- <del class="fs-6">{{
                 $filters.currency(item.product.origin_price)
               }}</del>
               元 <br> -->
                 <!-- <span class="text-danger">折扣價：</span> -->
-                {{ $filters.currency(item.product.price) }}元
-              </td>
+              <!-- </td> -->
               <!-- 商品總價 -->
-              <td class="text-end">{{ $filters.currency(item.total) }} 元</td>
+              <td class="text-center">
+                <small
+                  >單價： {{ $filters.currency(item.product.price) }}元</small
+                ><br>
+                合計：{{ $filters.currency(item.total) }}元
+              </td>
               <!-- 刪除紐 -->
               <td class="text-center">
                 <button
@@ -162,7 +168,7 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.cartData = res.data.data
           // console.log(this.cartData.carts.length)
           const cartItems = this.cartData.carts
@@ -186,7 +192,7 @@ export default {
       this.$http
         .delete(url)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.showAlert({ icon: 'success', title: `${res.data.message}` })
           emitter.emit('get-cart')
           this.getCart()
