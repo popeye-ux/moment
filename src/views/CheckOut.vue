@@ -30,10 +30,14 @@
         </div>
       </div>
       <div class="col text-center">
-        <div class="check-step d-flex flex-column justify-content-center"
-        :class="{'check-step-finished':order.is_paid}"
+        <div
+          class="check-step d-flex flex-column justify-content-center"
+          :class="{ 'check-step-finished': order.is_paid }"
         >
-          <i class="bi bi-dash-circle-dotted check-step-icon" v-if="!order.is_paid"></i>
+          <i
+            class="bi bi-dash-circle-dotted check-step-icon"
+            v-if="!order.is_paid"
+          ></i>
           <i class="bi bi-check2-circle check-step-icon" v-else></i>
           <span>STEP 3</span>
           <span>完成訂單</span>
@@ -41,30 +45,26 @@
       </div>
     </div>
     <div class="row text-center mt-7" v-if="order.is_paid">
-        <h2 class="fw-bolder">訂單已完成付款，謝謝您的訂購！</h2>
+      <h2 class="fw-bolder">訂單已完成付款，謝謝您的訂購！</h2>
     </div>
   </div>
   <div class="container my-7">
-    <div class="row row-cols-1 row-cols-sm-2">
-      <div class="col">
+    <div class="row" :class="order.is_paid ? 'justify-content-center' : ''">
+      <div class="col col-sm-6" v-if="!order.is_paid">
         <h3 class="fw-bold">訂購商品</h3>
         <table class="table">
           <thead>
             <tr>
-              <th style="width: 100px"></th>
+              <th class="check-none"></th>
               <th></th>
-              <th class="text-end" style="width: 150px"></th>
+              <th class="text-end check-no"></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in products" :key="item.id">
               <td>
                 <div
-                  style="
-                    height: 100px;
-                    background-size: cover;
-                    background-position: center center;
-                  "
+                  class="check-product-img"
                   :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
                 ></div>
               </td>
@@ -78,19 +78,27 @@
             </tr>
           </tbody>
           <tfoot>
-              <tr>
-                  <td colspan="3" class="text-end"><h4 class="text-danger">總金額 {{$filters.currency(order.total)}} 元</h4> </td>
-              </tr>
+            <tr>
+              <td colspan="3" class="text-end">
+                <h4 class="text-danger">
+                  總金額 {{ $filters.currency(order.total) }} 元
+                </h4>
+              </td>
+            </tr>
           </tfoot>
         </table>
       </div>
-      <div class="col">
-          <h3 class="fw-bold">訂單資訊<span class="fw-normal fs-5 text-danger">({{order.is_paid ? '已付款':'未付款'}})</span></h3>
+      <div class="col col-sm-6">
+        <h3 class="fw-bold">
+          訂單資訊<span class="fw-normal fs-5 text-danger"
+            >({{ order.is_paid ? "已付款" : "未付款" }})</span
+          >
+        </h3>
         <table class="table">
           <thead>
             <tr>
-              <th style="width: 150px"></th>
-              <th></th>
+              <th class="order-none"></th>
+              <th class="check-table-w60"></th>
             </tr>
           </thead>
           <tbody>
@@ -135,9 +143,15 @@
             </tr>
           </tbody>
         </table>
-        <button type="submit" class="btn add-btn w-100 py-3 mt-2"
+        <button
+          type="submit"
+          class="btn add-btn w-100 py-3 mt-2"
           v-if="!order.is_paid"
-          @click="payOrder">信用卡付款</button>
+          @click="payOrder"
+        >
+          信用卡付款
+        </button>
+        <router-link to="/products" class="btn add-btn btn-lg mt-3 fw-bolder d-flex justify-content-center" v-if="order.is_paid">繼續選購</router-link>
       </div>
     </div>
   </div>
@@ -154,22 +168,17 @@ export default {
   },
   watch: {
     is_paid () {
-      // console.log(this.is_paid)
       this.is_paid = this.order.is_paid
     }
   },
   methods: {
     getOrder () {
       const { id } = this.$route.params
-      // console.log(id)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`
       this.$http.get(url).then((res) => {
-        // console.log(res)
         this.order = res.data.order
         this.user = res.data.order.user
         this.products = res.data.order.products
-        // console.log(this.products)
-        // console.log(this.order)
       })
     },
     getDate (timestamp) {
@@ -179,12 +188,15 @@ export default {
     payOrder () {
       const { id } = this.$route.params
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
-      this.$http.post(url)
-        .then(res => {
-          // console.log(res)
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
-          this.getOrder()
+      this.$http.post(url).then((res) => {
+        this.showAlert({
+          icon: 'success',
+          title: `${res.data.message}`,
+          showConfirmButton: false,
+          timer: 1500
         })
+        this.getOrder()
+      })
     },
     showAlert (message) {
       // Use sweetalert2

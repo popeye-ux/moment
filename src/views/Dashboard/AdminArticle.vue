@@ -21,10 +21,10 @@ const newLocal=getPosts()
       </thead>
       <tbody>
         <tr v-for="item in posts" :key="item.id">
-          <td>{{item.title}}</td>
-          <td>{{item.author}}</td>
-          <td>{{item.description}}</td>
-          <td>{{getDate(item.create_at)}}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.author }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ getDate(item.create_at) }}</td>
           <td>
             <div class="form-check form-switch">
               <input
@@ -101,13 +101,12 @@ export default {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}`
       this.$http.get(url)
         .then((res) => {
-          // console.log(res)
           this.posts = res.data.articles
           this.pagination = res.data.pagination
           this.isLoading = false
         })
         .catch((err) => {
-          console.dir(err)
+          alert(err)
         })
     },
     updatePost (item) {
@@ -117,24 +116,21 @@ export default {
           this.isLoading = true
           console.log(res)
           this.getArticle = res.data.article
-          // console.log(this.getArticle.content)
           const content = this.getArticle.content
           this.tempArticle = item
           this.tempArticle.content = content
-          // console.log(this.tempArticle.content)
           this.$http.put(url, { data: this.tempArticle })
             .then((res) => {
-              console.log(res)
               this.isLoading = false
               this.showAlert({ icon: 'success', title: `${res.data.message}` })
               // alert(res.data.message)
             })
             .catch((err) => {
-              console.dir(err)
+              alert(err)
             })
         })
         .catch((err) => {
-          console.dir(err)
+          alert(err)
         })
     },
     openArticleModal (isNew, item) {
@@ -150,16 +146,14 @@ export default {
         this.$http.get(url)
           .then((res) => {
             this.tempArticle = res.data.article
-            console.log(this.tempArticle)
           })
           .catch((err) => {
-            console.log(err)
+            alert(err)
           })
       }
       this.$refs.postModal.openModal()
     },
     openDelModal (item) {
-      console.log(item)
       this.tempArticle = { ...item }
       this.$refs.delPost.openModal()
     },

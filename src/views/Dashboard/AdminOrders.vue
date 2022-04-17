@@ -26,19 +26,19 @@
     <tbody>
       <template v-for="item in orderData" :key="item.id">
         <tr v-if="orderData.length" :class="{ 'text-secondary': !item.is_paid }">
-          <td>{{getDate (item.create_at)}}</td>
-          <td><span>{{item.user.email}}</span></td>
+          <td>{{ getDate (item.create_at) }}</td>
+          <td><span>{{ item.user.email }}</span></td>
           <td>
             <table class="table">
               <tbody>
                 <tr v-for="(orderItem, i) in item.products" :key="i">
-                  <td width="100">{{orderItem.product.title}}</td>
-                  <td width="50">數量 {{orderItem.qty}} {{orderItem.product.unit}}</td>
+                  <td width="100">{{ orderItem.product.title }}</td>
+                  <td width="50">數量 {{ orderItem.qty }} {{ orderItem.product.unit }}</td>
                 </tr>
               </tbody>
             </table>
           </td>
-          <td class="text-right">{{$filters.currency(item.total)}}</td>
+          <td class="text-right">{{ $filters.currency(item.total) }}</td>
           <td>
             <div class="form-check form-switch">
               <input
@@ -72,9 +72,9 @@
       </template>
     </tbody>
   </table>
-  <pagination :pages="pagination" @emit-pages="getOrder"></pagination>
+  <pagination :pages="pagination" @get-products="getOrder"></pagination>
 </div>
-<order-modal ref="orderModal" :order="tempOrder" @update-paid="getOrder"></order-modal>
+<order-modal ref="orderModal" :order="tempOrder" @update-paid="updateOrder"></order-modal>
 <del-order-modal
     ref="delOrder"
     :temp-order="tempOrder"
@@ -91,8 +91,8 @@ export default {
       orderData: {},
       pagination: {},
       isLoading: false,
-      tempOrder: {},
-      page: 1
+      tempOrder: {}
+      // page: 1
     }
   },
   components: {
@@ -102,16 +102,14 @@ export default {
   },
   methods: {
     getOrder (page = 1) {
-      this.page = page
+      // this.page = page
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
       this.isLoading = true
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res)
           this.orderData = res.data.orders
           this.pagination = res.data.pagination
-          console.log(this.orderData)
           this.isLoading = false
         })
         .catch((err) => {
@@ -134,9 +132,8 @@ export default {
         paid.paid_day = ''
       }
       this.$http
-        .put(url, { data: paid })
+        .put(url, { data: item })
         .then((res) => {
-          console.log(res)
           this.getOrder(this.page)
           alert('訂單已更新')
           this.isLoading = false
@@ -160,7 +157,7 @@ export default {
         .delete(url)
         .then((res) => {
           this.getOrder(this.page)
-          alert('訂單已全部刪除')
+          alert('訂單' + res.message)
           this.isLoading = false
         })
         .catch((err) => {

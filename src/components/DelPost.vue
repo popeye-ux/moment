@@ -64,19 +64,14 @@ export default {
   },
   methods: {
     delPost () {
-      console.log(this.tempArticle.id)
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`
       this.$http.delete(url)
         .then(res => {
-          console.log(res)
           this.$emit('update')
           this.hideModal()
           alert('文章已刪除')
-          // this.delOrder.hide();
-          // this.getProducts();
         })
         .catch(err => {
-          console.dir(err)
           alert(err)
         })
     },

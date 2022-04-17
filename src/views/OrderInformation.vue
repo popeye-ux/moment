@@ -32,9 +32,9 @@
         <table class="table align-middle">
           <thead>
             <tr>
-              <th style="width: 100px"></th>
-              <th style="width: 150px">品名</th>
-              <th style="width: 150px" class="text-center">單價</th>
+              <th class="order-table-100"></th>
+              <th class="order-table-150">品名</th>
+              <th class="text-center order-table-150">單價</th>
             </tr>
           </thead>
           <tbody>
@@ -42,12 +42,7 @@
             <template v-if="cartData.carts">
               <tr v-for="item in cartData.carts" :key="item.id">
                 <td>
-                  <div
-              style="
-                height: 100px;
-                background-size: cover;
-                background-position: center center;
-              "
+                  <div class="order-info-product-img"
               :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
             ></div>
                 </td>
@@ -100,10 +95,10 @@
         </table>
       </div>
       <div class="col-12 col-md-6 ps-md-5 justify-content-center">
-        <h3 class="mb-3 fw-bold">填寫訂購資訊</h3>
+        <h3 class="mb-3 fw-bold">填寫訂購資訊<span class="form-note"> (標註 * 為必填資訊)</span></h3>
         <Form ref="form" @submit="submitOrders" v-slot="{ errors }">
           <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
+            <label for="email" class="form-label">Email<span class="form-note">*</span></label>
             <Field
               id="email"
               name="email"
@@ -114,14 +109,14 @@
               placeholder="請輸入 Email"
               v-model="form.user.email"
             ></Field>
-            <error-message
+            <ErrorMessage
               name="email"
               class="invalid-feedback"
-            ></error-message>
+            ></ErrorMessage>
           </div>
 
           <div class="mb-3">
-            <label for="name" class="form-label">收件人姓名</label>
+            <label for="name" class="form-label">收件人姓名<span class="form-note">*</span></label>
             <Field
               id="name"
               name="姓名"
@@ -132,11 +127,11 @@
               rules="required"
               v-model="form.user.name"
             ></Field>
-            <error-message name="姓名" class="invalid-feedback"></error-message>
+            <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
           </div>
 
           <div class="mb-3">
-            <label for="tel" class="form-label">收件人電話</label>
+            <label for="tel" class="form-label">收件人電話<span class="form-note">*</span></label>
             <Field
               id="tel"
               name="電話"
@@ -147,11 +142,11 @@
               placeholder="請輸入電話"
               v-model="form.user.tel"
             ></Field>
-            <error-message name="電話" class="invalid-feedback"></error-message>
+            <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
           </div>
 
           <div class="mb-3">
-            <label for="address" class="form-label">收件人地址</label>
+            <label for="address" class="form-label">收件人地址<span class="form-note">*</span></label>
             <Field
               id="address"
               name="地址"
@@ -162,7 +157,7 @@
               rules="required"
               v-model="form.user.address"
             ></Field>
-            <error-message name="地址" class="invalid-feedback"></error-message>
+            <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
           </div>
           <div class="mb-3">
             <label for="message" class="form-label">留言</label>
@@ -249,7 +244,12 @@ export default {
       this.$http
         .post(url, { data: order })
         .then((res) => {
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
+          this.showAlert({
+            icon: 'success',
+            title: `${res.data.message}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           // alert(res.data.message)
           this.isLoadingItem = ''
           this.getCart()
@@ -267,22 +267,24 @@ export default {
       const coupon = {
         code: this.coupon_code
       }
-      // console.log(this.coupon_code)
       this.isLoading = true
       this.$http
         .post(url, { data: coupon })
         .then((res) => {
-          // console.log(res)
           this.getCart()
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
+          this.showAlert({
+            icon: 'success',
+            title: `${res.data.message}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.coupon_code = ''
           this.isDiscount = true
           this.isLoading = false
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false
           this.showAlert({ icon: 'error', title: '您輸入無效的優惠碼！' })
-          console.dir(err)
         })
     },
     showAlert (message) {

@@ -49,7 +49,9 @@ app.component('Loading', Loading)
 // Sweet alert2 提示框
 const options = {
   confirmButtonColor: '#141414',
-  cancelButtonColor: '##41b882'
+  cancelButtonColor: '##41b882',
+  position: 'top-end',
+  toast: true
 }
 app.use(VueSweetalert2, options)
 // 文章編輯介面

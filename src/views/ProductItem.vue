@@ -162,9 +162,8 @@
         <div class="card-body">
           <img
             :src="select.imageUrl"
-            class="card-img-top img-fluid"
+            class="card-img-top img-fluid product-item-img"
             :alt="select.title"
-            style="background-color: #ebedee"
           />
           <div class="mt-4 text-center">
             <h6 class="card-subtitle text-info">{{ select.description }}</h6>
@@ -232,7 +231,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       this.$http.get(url).then((response) => {
         this.products = response.data.products
-        // console.log(this.productDetail.id)
         const currentId = this.productDetail.id
         this.recommendLike = this.products.filter(function (item) {
           if (item.id !== currentId && item.recommend === 1) {
@@ -247,9 +245,7 @@ export default {
       const { id } = this.$route.params
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`
       this.$http.get(url).then((response) => {
-        // console.log(response)
         this.productDetail = response.data.product
-        // console.log(this.productDetail.imagesUrl[0])
         this.getData()
         this.isLoading = false
       })
@@ -262,7 +258,6 @@ export default {
       }
       if (this.qty <= 0) {
         this.showAlert({ icon: 'error', title: '數量必須大於0' })
-        // alert('數量必須大於0')
         return
       }
       this.isLoadingItem = id
@@ -270,7 +265,6 @@ export default {
       this.$http
         .post(url, { data })
         .then((res) => {
-          // console.log(res)
           this.isLoadingItem = ''
           this.showAlert({ icon: 'success', title: `${res.data.message}` })
           emitter.emit('get-cart')
@@ -281,7 +275,6 @@ export default {
         })
     },
     showAlert (message) {
-      // Use sweetalert2
       this.$swal(message)
     }
   },

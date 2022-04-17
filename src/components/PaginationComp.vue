@@ -9,9 +9,9 @@
       <li class="page-item"
       :class="{active: page=== pages.current_page}"
       v-for="page in pages.total_pages" :key="page + 'page'">
-      <span class="page-link" v-if="page === pages.current_page">{{page}}</span>
+      <span class="page-link" v-if="page === pages.current_page">{{ page }}</span>
       <a class="page-link" href="#" v-else
-      @click.prevent="$emit('get-products', page)">{{page}}</a>
+      @click.prevent="$emit('get-products', page)">{{ page }}</a>
       </li>
       <li class="page-item" :class="{disabled:!pages.has_next}">
         <a class="page-link" href="#" aria-label="Next" @click.prevent="$emit('get-products',pages.current_page+1)">

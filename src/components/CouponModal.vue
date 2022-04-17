@@ -142,7 +142,6 @@ export default {
   },
   methods: {
     updateCoupon (tempCoupon) {
-      console.log(tempCoupon)
       let url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`
       let httpMethod = 'post'
       if (!tempCoupon.is_enabled) {
@@ -157,7 +156,6 @@ export default {
       this.$http[httpMethod](url, { data: newCoupon })
         .then((res) => {
           this.$emit('update-coupon')
-          console.log(res)
           if (this.isNew) {
             alert('新增優惠券')
           } else {
@@ -166,7 +164,7 @@ export default {
           this.hideModal()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err)
         })
     },
     openModal () {

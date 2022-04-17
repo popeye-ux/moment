@@ -75,17 +75,7 @@ export default {
       isLoading: false
     }
   },
-  // methods: {
-  //   loading () {
-  //     this.isLoading = true
-  //     setTimeout(() => {
-  //       this.isLoading = false
-  //     }, 1000)
-  //   }
-  // },
   mounted () {
-    window.scroll(0, 0)
-    // this.loading()
     window.scroll(0, 0)
     AOS.init()
   }

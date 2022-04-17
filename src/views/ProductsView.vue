@@ -11,6 +11,7 @@
       <!-- 內層不決定寬度 -->
       <div class="col mb-6" v-for="item in products" :key="item.id" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
+     <router-link :to="`/product/${item.id}`">
         <div class="card h-100">
           <div class="card-body">
             <img
@@ -35,7 +36,7 @@
             <button
               type="button"
               class="btn add-btn"
-              @click="addToCart(item.id)"
+              @click.prevent="addToCart(item.id)"
               :disabled="isLoadingItem === item.id"
             >
               <span
@@ -46,6 +47,7 @@
             </button>
           </div>
         </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -80,7 +82,6 @@ export default {
       this.$http.get(url).then((response) => {
         const { products, pagination } = response.data
         this.products = products
-        // console.log(this.products)
         this.pagination = pagination
         this.isLoading = false
       })
@@ -95,15 +96,18 @@ export default {
       this.$http
         .post(url, { data })
         .then((res) => {
-          // console.log(res)
           if (data.qty <= 0) {
             alert('數量必須大於0')
             // this.isLoadingItem = '';
             return
           }
           this.isLoadingItem = ''
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
-          // alert(res.data.message)
+          this.showAlert({
+            icon: 'success',
+            title: `${res.data.message}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           emitter.emit('get-cart')
         })
         .catch((err) => {
@@ -114,15 +118,10 @@ export default {
     showAlert (message) {
       // Use sweetalert2
       this.$swal(message)
-      window.scroll(0, 0)
       AOS.init()
     }
   },
   mounted () {
-    // const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products`
-    // this.$http.get(url).then((response) => {
-    //   this.products = response.data.products
-    // })
     this.getData()
     window.scroll(0, 0)
     AOS.init()

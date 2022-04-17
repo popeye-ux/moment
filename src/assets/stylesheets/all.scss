@@ -8,8 +8,11 @@ body {
   background: #f4f5f6;
   color: #141414;
   letter-spacing: 1px;
+  overflow-x: hidden;
 }
-
+a {
+  text-decoration: none;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -199,6 +202,9 @@ $hover: darken($bg, 10%);
 .check-step-icon {
   font-size: 3rem;
 }
+.check-table-w60 {
+  width: 60%;
+}
 //homepage
 :root {
   --color: #fff;
@@ -255,7 +261,85 @@ $hover: darken($bg, 10%);
   animation: spin 3s linear;
   animation-fill-mode: forwards;
 }
+.mail-box {
+  height: 300px;
+}
 
+//購物車
+.cart-table {
+  padding-right: 0; 
+  padding-left: 0;
+}
+.cart-table-none {
+  width: 150px;
+}
+.cart-num {
+  width: 50px;
+}
+.cart-product-img {
+  height: 150px;
+  background-size: cover;
+  background-position: center center;
+}
+.cart-select {
+  width:70px;
+}
+
+// checkOut
+.check-none {
+  width: 100px;
+}
+.check-no {
+  width: 150px;
+}
+.check-product-img {
+  height: 100px;
+  background-size: cover;
+  background-position: center center;
+}
+.order-none{
+  width: 150px;
+}
+.form-note {
+  color: red;
+  font-size: 14px;
+  font-weight: normal;
+}
+// 訂單
+.order-table-100 {
+  width: 100px
+}
+.order-table-150 {
+  width: 150px;
+}
+.order-info-product-img {
+  height: 100px;
+  background-size: cover;
+  background-position: center center;
+}
+// 產品單頁
+.product-item-img {
+  background-color: #ebedee;
+}
+// 後台文章
+.w-200 {
+  width: 200px;
+}
+.w-100 {
+  width: 100px;
+}
+.w-150 {
+  width: 150px;
+}
+.w-120 {
+  width: 120px;
+}
+// 後台產品
+.admin-product-img {  
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+}
 @keyframes spin {
   from {
     stroke-dasharray: 0 157;
@@ -314,7 +398,7 @@ $hover: darken($bg, 10%);
 }
 
 @media (max-width: 576px) {
-  .l-section-top {
+    .l-section-top {
     display: none;
   }
 }

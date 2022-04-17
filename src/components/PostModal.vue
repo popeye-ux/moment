@@ -235,7 +235,6 @@ export default {
       this.$http[httpMethod](url, { data: tempArticle })
         .then((res) => {
           this.$emit('update-article')
-          console.log(res)
           if (this.isNew) {
             alert('新增文章')
           } else {
@@ -244,7 +243,7 @@ export default {
           this.hideModal()
         })
         .catch((err) => {
-          console.log(err)
+          alert(err)
         })
     },
     openModal () {

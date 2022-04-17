@@ -107,28 +107,25 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res)
           this.coupons = res.data.coupons
           this.isLoading = false
         })
         .catch((err) => {
-          console.log(err)
+          alert(err)
         })
     },
     updateEnable (item) {
-      console.log(item)
       this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${item.id}`
       this.$http
         .put(url, { data: item })
         .then((res) => {
-          console.log(res)
           alert('優惠券已更新')
           this.isLoading = false
         })
         .catch((err) => {
           this.isLoading = false
-          console.log(err)
+          alert(err)
         })
     },
     updateCoupon (tempCoupon) {
@@ -143,12 +140,11 @@ export default {
       }
       this.$http[httpMethod](url, { data })
         .then((res) => {
-          console.log(res)
           this.isLoading = false
         })
         .catch((err) => {
           this.isLoading = false
-          console.log(err)
+          alert(err)
         })
     },
     openCouponModal (isNew, item) {

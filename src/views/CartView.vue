@@ -11,21 +11,19 @@
         class="btn btn-outline-danger"
         type="button"
         :disabled="cartData.carts.length === 0"
-        @click="removeAllCart"
+        @click="cleanAllCart"
       >
         清空購物車
       </button>
     </div>
     <div class="table-responsive">
       <table
-        class="table align-middle mt-3"
-        style="padding-right: 0; padding-left: 0"
-      >
+        class="table align-middle mt-3 cart-table">
         <thead>
           <tr>
-            <th style="width: 150px" class="d-none d-sm-table-cell"></th>
+            <th  class="d-none d-sm-table-cell cart-table-none"></th>
             <th class="text-start">產品名稱</th>
-            <th class="text-center" style="width: 50px">數量</th>
+            <th class="text-center cart-num">數量</th>
             <!-- <th class="text-center">單價</th> -->
             <th class="text-center">價格</th>
             <th class="text-center">刪除</th>
@@ -38,34 +36,21 @@
               <!-- 商品圖 -->
               <td class="text-center d-none d-sm-table-cell">
                 <div
-                  class="d-none d-sm-block"
-                  style="
-                    height: 150px;
-                    background-size: cover;
-                    background-position: center center;
-                  "
+                  class="d-none d-sm-block cart-product-img"
                   :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
                 ></div>
               </td>
               <!-- 商品名稱 -->
               <td>
                 {{ item.product.title }}
-                <!-- <div class="text-success">已套用優惠券</div> -->
               </td>
-              <!-- 商品數量 -->
               <td>
                 <div class="input-group input-group-sm">
                   <div class="input-group mb-3">
-                    <!-- <input
-                          min="1"
-                          type="number"
-                          class="form-control"
-                          v-model.number="item.qty"
-                        /> -->
                     <select
                       name=""
                       id=""
-                      class="form-select"
+                      class="form-select cart-select"
                       v-model="item.qty"
                       @change="updateCartItem(item)"
                       :disabled="isLoadingItem === item.id"
@@ -79,35 +64,21 @@
                         {{ num }}
                       </option>
                     </select>
-                    <!-- <span class="input-group-text" id="basic-addon2">{{
-                      item.product.unit
-                    }}</span> -->
                   </div>
                 </div>
               </td>
-              <!-- 商品單價 -->
-              <!-- <td class="text-center"> -->
-                <!-- <del class="fs-6">{{
-                $filters.currency(item.product.origin_price)
-              }}</del>
-              元 <br> -->
-                <!-- <span class="text-danger">折扣價：</span> -->
-              <!-- </td> -->
-              <!-- 商品總價 -->
               <td class="text-center">
                 <small
                   >單價： {{ $filters.currency(item.product.price) }}元</small
                 ><br>
                 合計：{{ $filters.currency(item.total) }}元
               </td>
-              <!-- 刪除紐 -->
               <td class="text-center">
                 <button
                   type="button"
                   class="btn text-danger fs-4"
                   @click="removeCartItem(item.id)"
                 >
-                  <!-- <i class="fas fa-spinner fa-pulse"></i> -->
                   <i class="bi bi-trash"></i>
                 </button>
               </td>
@@ -115,16 +86,7 @@
           </template>
         </tbody>
         <tfoot>
-          <!-- <tr>
-          <td colspan="4" class="text-end">原價總計</td>
-          <td class="text-end">
-            <del>{{ $filters.currency(originalPriceTotal) }}</del
-            >元
-          </td>
-          <td></td>
-        </tr> -->
           <tr>
-            <!-- <td colspan="4" class="text-end text-danger fw-bolder"><h3>折扣價總計</h3></td> -->
             <td colspan="6" class="text-end text-danger fw-bolder pt-3">
               <h3 class="fw-bolder">
                 總價 {{ $filters.currency(cartData.total) }}元
@@ -168,9 +130,7 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          // console.log(res)
           this.cartData = res.data.data
-          // console.log(this.cartData.carts.length)
           const cartItems = this.cartData.carts
           const amount = cartItems.reduce(function (acc, item) {
             return (
@@ -178,11 +138,7 @@ export default {
             )
           }, 0)
           this.originalPriceTotal = amount
-          // console.log(amount)
           this.isLoading = false
-        })
-        .catch((err) => {
-          console.log(err.message)
         })
     },
     removeCartItem (id) {
@@ -192,14 +148,17 @@ export default {
       this.$http
         .delete(url)
         .then((res) => {
-          // console.log(res)
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
+          this.showAlert({
+            icon: 'success',
+            title: `${res.data.message}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           emitter.emit('get-cart')
           this.getCart()
         })
         .catch((err) => {
           this.showAlert({ icon: 'error', title: `${err.message}` })
-          // alert(err.data.message)
         })
     },
     updateCartItem (item) {
@@ -212,36 +171,46 @@ export default {
       this.$http
         .put(url, { data })
         .then((res) => {
-          // console.log(res)
           this.getCart()
           emitter.emit('get-cart')
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
+          this.showAlert({
+            icon: 'success',
+            title: `${res.data.message}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.isLoadingItem = ''
         })
         .catch((err) => {
           this.showAlert({ icon: 'error', title: `${err.message}` })
-          // alert(err.data.message)
           this.isLoadingItem = ''
         })
     },
-    removeAllCart () {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
-      this.$http
-        .delete(url)
-        .then((res) => {
-          this.showAlert({ icon: 'success', title: `${res.data.message}` })
-          // alert(res.data.message)
-          this.getCart()
-          emitter.emit('get-cart')
-          this.isLoading = false
-        })
-        .catch((err) => {
-          alert(err.data.message)
-        })
+    cleanAllCart () {
+      this.$swal({
+        icon: 'question',
+        title: '確認刪除購物車?',
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.isLoading = true
+          const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
+          this.$http
+            .delete(url)
+            .then((res) => {
+              this.getCart()
+              emitter.emit('get-cart')
+              this.isLoading = false
+            })
+            .catch((err) => {
+              alert(err.data.message)
+            })
+        }
+      })
     },
     showAlert (message) {
-      // Use sweetalert2
       this.$swal(message)
     }
   },

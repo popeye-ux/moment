@@ -1,8 +1,8 @@
 <template>
 <div class="wrapper">
-<FrontNavbar></FrontNavbar>
-<router-view />
-<FrontFooter></FrontFooter>
+<FrontNavbar/>
+<RouterView />
+<FrontFooter/>
 </div>
 </template>
 <script>

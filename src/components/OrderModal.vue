@@ -1,5 +1,5 @@
 <template>
-<div
+  <div
     class="modal fade"
     id="productModal"
     tabindex="-1"
@@ -8,7 +8,7 @@
     aria-hidden="true"
     ref="orderModal"
   >
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
@@ -28,20 +28,48 @@
               <table class="table">
                 <tbody v-if="tempOrder.user">
                   <tr>
-                    <th style="width: 100px">姓名</th>
-                    <td>{{ tempOrder.user.name }}</td>
+                    <td>
+                      <label for="name" class="form-label">姓名</label>
+                      <input
+                        id="name"
+                        type="text"
+                        class="form-control"
+                        v-model="tempOrder.user.name"
+                      />
+                    </td>
                   </tr>
                   <tr>
-                    <th>Email</th>
-                    <td>{{ tempOrder.user.email }}</td>
+                    <td>
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        id="email"
+                        type="email"
+                        class="form-control"
+                        v-model="tempOrder.user.email"
+                      />
+                    </td>
                   </tr>
                   <tr>
-                    <th>電話</th>
-                    <td>{{ tempOrder.user.tel }}</td>
+                    <td>
+                      <label for="tel" class="form-label">電話</label>
+                      <input
+                        id="tel"
+                        type="tel"
+                        class="form-control"
+                        v-model="tempOrder.user.tel"
+                      />
+                    </td>
                   </tr>
                   <tr>
-                    <th>地址</th>
-                    <td>{{ tempOrder.user.address }}</td>
+                    <td>
+                      <label for="address" class="form-label">地址</label>
+                      <input
+                        id="address"
+                        type="text"
+                        class="form-control"
+                        v-model="tempOrder.user.address"
+                      />
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -56,13 +84,13 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td>{{getDate (tempOrder.create_at)}}</td>
+                    <td>{{ getDate(tempOrder.create_at) }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
                     <td>
                       <span v-if="tempOrder.is_paid">
-                          {{paidOrder(tempOrder)}}
+                        {{ paidOrder(tempOrder) }}
                       </span>
                       <span v-else>尚未付款</span>
                     </td>
@@ -78,8 +106,7 @@
                   </tr>
                   <tr>
                     <th>總金額</th>
-                    <td>
-                    </td>
+                    <td>{{ tempOrder.total }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -94,8 +121,7 @@
                       {{ item.product.title }}
                     </th>
                     <td>{{ item.qty }} / {{ item.product.unit }}</td>
-                    <td class="text-end">
-                    </td>
+                    <td class="text-end"></td>
                   </tr>
                 </tbody>
               </table>
@@ -129,7 +155,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            @click="updateOrder(tempOrder)"
+            @click="update"
           >
             修改付款狀態
           </button>
@@ -144,14 +170,16 @@ export default {
   props: {
     order: {
       type: Object,
-      default () { return {} }
+      default () {
+        return {}
+      }
     }
   },
   data () {
     return {
       status: {},
       modal: '',
-      tempOrder: {},
+      tempOrder: this.order,
       isPaid: false,
       paid: {}
     }
@@ -165,7 +193,7 @@ export default {
   },
   watch: {
     order () {
-      this.tempOrder = JSON.parse(JSON.stringify(this.order)) // 因為單向數據流的關係，所以要用深拷貝另外見一個物件來存資料
+      this.tempOrder = this.order
     }
   },
   methods: {
@@ -181,18 +209,9 @@ export default {
         this.paid.paid_day = ''
       }
     },
-    updateOrder (tempOrder) {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${tempOrder.id}`
-      this.$http.put(url, { data: this.paid })
-        .then((res) => {
-          this.$emit('update-paid')
-          this.modal.hide()
-          alert(res.data.message)
-          // this.productModal.hide();
-        })
-        .catch((err) => {
-          alert(err)
-        })
+    update () {
+      this.$emit('update-paid', this.tempOrder)
+      this.modal.hide()
     },
     getDate (timestamp) {
       const date = new Date(timestamp * 1000)

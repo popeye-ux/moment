@@ -24,12 +24,7 @@
         <tr v-for="item in products" :key="item.id">
           <td class="align-middle">{{ item.category }}</td>
           <td>
-            <div
-              style="
-                height: 100px;
-                background-size: cover;
-                background-position: center;
-              "
+            <div class="admin-product-img"
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
             ></div>
           </td>
@@ -151,7 +146,6 @@ export default {
         // 點擊「修改產品」，帶入的參數為 edit
       } else if (status === 'edit') {
         this.tempProduct = { ...item }
-        // console.log(this.tempProduct.id);
         // if (!this.isNew) 使用put方法
         this.isNew = false
         this.$refs.productModal.openModal()

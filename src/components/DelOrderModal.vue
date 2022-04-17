@@ -67,15 +67,11 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.$http.delete(url)
         .then(res => {
-          console.log(res)
           this.$emit('update')
           this.hideModal()
           alert('訂單已刪除')
-          // this.delOrder.hide();
-          // this.getProducts();
         })
         .catch(err => {
-          console.dir(err)
           alert(err)
         })
     },

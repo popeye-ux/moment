@@ -18,7 +18,7 @@
                   required
                   autofocus
                 ></Field>
-                <error-message name="Email" class="invalid-feedback"></error-message>
+                <ErrorMessage name="Email" class="invalid-feedback"></ErrorMessage>
               </div>
               <div class="mb-4">
                 <label for="passwordInput" class="form-label">Password</label>
@@ -33,7 +33,7 @@
                   rules="required"
                   required
                 ></Field>
-                <error-message name="Password" class="invalid-feedback"></error-message>
+                <ErrorMessage name="Password" class="invalid-feedback"></ErrorMessage>
               </div>
               <button
                 class="btn btn-lg btn-primary w-100 mt-4"
@@ -43,6 +43,7 @@
                 登入
               </button>
             </Form>
+            <router-link to="/" class="btn btn-lg btn-secondary w-100 mt-4">回到前台</router-link>
           </div>
         </div>
       </div>
@@ -62,13 +63,11 @@ export default {
       const api = `${process.env.VUE_APP_API}admin/signin`
       this.$http.post(api, this.user).then((res) => {
         const { token, expired } = res.data
-        // console.log(res)
         // 寫入 cookie token
         // expires 設置有效時間
         document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`
-        this.$router.push('/admin')
+        this.$router.push('/admin/products')
       }).catch((err) => {
-        // console.dir(err.response.data.message)
         alert(err.response.data.message)
       })
     }

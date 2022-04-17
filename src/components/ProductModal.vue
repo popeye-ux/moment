@@ -9,7 +9,6 @@
   >
     <div class="modal-dialog modal-xl">
       <div class="modal-content border-0">
-        <!-- Modal表頭背景色會隨「新增產品」或「修改產品」不同而變色 -->
         <div
           :class="isNew ? 'bg-primary' : 'bg-success'"
           class="modal-header text-white"
@@ -238,6 +237,21 @@
                   >
                 </div>
               </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    id="sale"
+                    class="form-check-input"
+                    type="checkbox"
+                    :true-value="1"
+                    :false-value="0"
+                    v-model="tempProduct.sale"
+                  />
+                  <label class="form-check-label" for="sale"
+                    >行銷活動</label
+                  >
+                </div>
+              </div>
             </div>
             <div class="col-sm-4">
               <div class="mb-3">
@@ -314,7 +328,6 @@
           <button
             type="button"
             class="btn btn-primary"
-            data-bs-dismiss="modal"
             @click="updateProduct"
           >
             確認
@@ -361,10 +374,9 @@ export default {
           // this.getProducts(); 這裡沒有getProducts()--外層的方法
           this.$emit('get-data')
           this.modal.hide()
-          // this.productModal.hide();
         })
         .catch((err) => {
-          alert(err.data.message)
+          alert(err.message)
         })
     },
     openModal () {
@@ -374,9 +386,7 @@ export default {
       this.modal.hide()
     },
     upload (isMain, event) {
-      // console.dir(event);
       const file = event.target.files[0]
-      // console.log(file);
       const formData = new FormData()
       formData.append('file-to-upload', file)
       this.$http
@@ -394,14 +404,12 @@ export default {
             !Array.isArray(this.tempProduct.imagesUrl)
           ) {
             this.tempProduct.imagesUrl = []
-            console.log('a', res.data.imageUrl)
             this.tempProduct.imagesUrl.push(res.data.imageUrl)
             this.$refs.pathesClear.value = ''
           } else if (
             isMain === 'sub' &&
             Array.isArray(this.tempProduct.imagesUrl)
           ) {
-            console.log('b', res.data.imageUrl)
             this.tempProduct.imagesUrl.push(res.data.imageUrl)
             this.$refs.pathesClear.value = ''
           }
