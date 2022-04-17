@@ -52,8 +52,6 @@
                 </td>
                 <td class="text-center py-3">
                   {{ $filters.currency(item.product.price) }} 元
-                  <!-- <small class="text-success">折扣價：</small>
-                  {{}} -->
                 </td>
               </tr>
             </template>
@@ -231,11 +229,10 @@ export default {
         .get(url)
         .then((res) => {
           this.cartData = res.data.data
-          // console.log(this.cartData)
           this.isLoading = false
         })
         .catch((err) => {
-          console.log(err.message)
+          alert(err.message)
         })
     },
     submitOrders () {
@@ -259,7 +256,7 @@ export default {
           this.$router.push(`/checkout/${res.data.orderId}`)
         })
         .catch((err) => {
-          console.log(err.message)
+          alert(err.message)
         })
     },
     addCouponCode () {

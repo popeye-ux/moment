@@ -126,14 +126,61 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container mb-5">
     <div class="row">
-      <div class="col-12" style="overflow-x:hidden;">
-
+      <div
+        class="col"
+        data-aos="fade-up"
+        data-aos-easing="linear"
+        data-aos-duration="1500"
+      >
+        <div
+          class="
+            sea-festival
+            d-flex
+            align-items-center
+            justify-content-center
+            px-5
+          "
+        >
+          <div style="color: #fff" class="text-center mt-7">
+            <h2 class="campaign-title">
+              海洋夏日節
+            </h2>
+            <p class="campaign-text">
+              即將到來的夏日，何不戴著我們為您精心準備了的潛水錶，盡情享受海洋的浪潮！
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mb-7" style="overflow-x: hidden">
+      <div class="col-12 text-center mb-4">
+        <h2 class="campaign-subtitle">精選潛水錶</h2>
+      </div>
+      <div>
         <swiper
-          :slides-per-view="4"
-          :space-between="50"
-          :loop="true"
+          :breakpoints="{
+            '480': {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            '640': {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            '768': {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            '1024': {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }"
+          :loop = "true"
           :modules="modules"
           :autoplay="{
             delay: 5000,
@@ -142,42 +189,49 @@
         >
           <swiper-slide v-for="item in hotSale" :key="item.id">
             <router-link :to="`/product/${item.id}`">
-        <div class="card h-100">
-          <div class="card-body">
-            <img
-              :src="item.imageUrl"
-              class="card-img-top img-fluid"
-              :alt="item.title"
-              style="background-color:#ebedee"
-            />
-            <div class="mt-4 text-center">
-              <h6 class="card-subtitle text-info">{{ item.description }}</h6>
-              <div class="product-title"><h5 class="card-title h4 font-monospace">{{ item.title }}</h5></div>
-              <div class="d-flex justify-content-evenly mx-3">
-                <div class="card-text">NT$.{{ $filters.currency(item.price) }}</div>
-                <div class="align-middle"><del class="card-text h6 text-info">NT$.{{ $filters.currency(item.origin_price) }}</del></div>
+              <div class="card h-100">
+                <div class="card-body">
+                  <img
+                    :src="item.imageUrl"
+                    class="card-img-top img-fluid"
+                    :alt="item.title"
+                    style="background-color: #ebedee"
+                  />
+                  <div class="mt-4 text-center">
+                    <h6 class="card-subtitle text-info">
+                      {{ item.description }}
+                    </h6>
+                    <div class="product-title">
+                      <h5 class="card-title h4 font-monospace">
+                        {{ item.title }}
+                      </h5>
+                    </div>
+                    <div class="d-flex justify-content-evenly mx-3">
+                      <div class="card-text">
+                        NT$.{{ $filters.currency(item.price) }}
+                      </div>
+                      <div class="align-middle">
+                        <del class="card-text h6 text-info"
+                          >NT$.{{ $filters.currency(item.origin_price) }}</del
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between mb-3">
+                  <router-link :to="`/product/${item.id}`" class="btn more-btn">
+                    查看更多
+                  </router-link>
+                  <button
+                    type="button"
+                    class="btn add-btn"
+                    @click.prevent="addToCart(item.id)"
+                  >
+                    加入購物車
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="card-footer d-flex justify-content-between mb-3">
-            <router-link :to="`/product/${item.id}`" class="btn more-btn">
-              查看更多
             </router-link>
-            <button
-              type="button"
-              class="btn add-btn"
-              @click.prevent="addToCart(item.id)"
-              :disabled="isLoadingItem === item.id"
-            >
-              <span
-                class="spinner-border spinner-border-sm fill"
-                v-show="isLoadingItem === item.id"
-              ></span
-              >加入購物車
-            </button>
-          </div>
-        </div>
-        </router-link>
           </swiper-slide>
         </swiper>
       </div>
@@ -267,7 +321,6 @@ export default {
             return item
           }
         })
-        console.log(this.hotSale)
       })
     },
     addToCart (id, qty = 1) {
@@ -275,17 +328,14 @@ export default {
         product_id: id,
         qty
       }
-      this.isLoadingItem = id
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.$http
         .post(url, { data })
         .then((res) => {
           if (data.qty <= 0) {
             alert('數量必須大於0')
-            // this.isLoadingItem = '';
             return
           }
-          this.isLoadingItem = ''
           this.showAlert({
             icon: 'success',
             title: `${res.data.message}`,
@@ -296,7 +346,6 @@ export default {
         })
         .catch((err) => {
           this.showAlert({ icon: 'success', title: `${err.message}` })
-          this.isLoadingItem = ''
         })
     },
     submitEmail () {

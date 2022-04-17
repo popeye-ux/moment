@@ -17,16 +17,12 @@
       </button>
     </div>
     <div class="table-responsive">
-      <table
-        class="table align-middle mt-3 cart-table">
+      <table class="table align-middle mt-3 cart-table">
         <thead>
           <tr>
-            <th  class="d-none d-sm-table-cell cart-table-none"></th>
-            <th class="text-start">產品名稱</th>
+            <th class="text-start cart-name">產品名稱</th>
             <th class="text-center cart-num">數量</th>
-            <!-- <th class="text-center">單價</th> -->
-            <th class="text-center">價格</th>
-            <th class="text-center">刪除</th>
+            <th class="text-end cart-del">刪除</th>
           </tr>
         </thead>
         <tbody>
@@ -34,18 +30,23 @@
           <template v-if="cartData.carts.length">
             <tr v-for="item in cartData.carts" :key="item.id">
               <!-- 商品圖 -->
-              <td class="text-center d-none d-sm-table-cell">
-                <div
-                  class="d-none d-sm-block cart-product-img"
-                  :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
-                ></div>
-              </td>
               <!-- 商品名稱 -->
-              <td>
-                {{ item.product.title }}
+              <td class="text-start">
+                <div class="d-flex-column d-sm-flex justify-content-start align-items-center cart-name-pict">
+                  <div
+                    class="d-sm-block cart-product-img"
+                    :style="{
+                      backgroundImage: `url(${item.product.imageUrl})`,
+                    }"
+                  ></div>
+                  <b>{{ item.product.title }}</b>
+                </div>
               </td>
-              <td>
-                <div class="input-group input-group-sm">
+              <td class="text-center">
+                <small>單價 {{ $filters.currency(item.product.price) }}元</small
+                ><br />
+                <b>合計 {{ $filters.currency(item.total) }}元</b>
+                <div class="input-group input-group-sm text-center d-flex-row mt-2">
                   <div class="input-group mb-3">
                     <select
                       name=""
@@ -54,7 +55,7 @@
                       v-model="item.qty"
                       @change="updateCartItem(item)"
                       :disabled="isLoadingItem === item.id"
-                      style="width:70px;"
+                      width="100px"
                     >
                       <option
                         :value="num"
@@ -67,13 +68,7 @@
                   </div>
                 </div>
               </td>
-              <td class="text-center">
-                <small
-                  >單價： {{ $filters.currency(item.product.price) }}元</small
-                ><br>
-                合計：{{ $filters.currency(item.total) }}元
-              </td>
-              <td class="text-center">
+              <td class="text-end cart-end">
                 <button
                   type="button"
                   class="btn text-danger fs-4"
@@ -127,19 +122,15 @@ export default {
     getCart () {
       this.isLoading = true
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      this.$http
-        .get(url)
-        .then((res) => {
-          this.cartData = res.data.data
-          const cartItems = this.cartData.carts
-          const amount = cartItems.reduce(function (acc, item) {
-            return (
-              acc + parseInt(item.product.origin_price) * parseInt(item.qty)
-            )
-          }, 0)
-          this.originalPriceTotal = amount
-          this.isLoading = false
-        })
+      this.$http.get(url).then((res) => {
+        this.cartData = res.data.data
+        const cartItems = this.cartData.carts
+        const amount = cartItems.reduce(function (acc, item) {
+          return acc + parseInt(item.product.origin_price) * parseInt(item.qty)
+        }, 0)
+        this.originalPriceTotal = amount
+        this.isLoading = false
+      })
     },
     removeCartItem (id) {
       this.isLoadingItem = id

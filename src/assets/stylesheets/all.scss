@@ -10,6 +10,7 @@ body {
   letter-spacing: 1px;
   overflow-x: hidden;
 }
+
 a {
   text-decoration: none;
 }
@@ -23,10 +24,10 @@ a {
   height: 200px;
 }
 .login {
-  color:#7383a3;
+  color: #7383a3;
 }
 .login:hover {
-  color:#dcdcdc;
+  color: #dcdcdc;
 }
 .container.custom-container-width {
   max-width: 1200px; // 最後內容寬會是 980px
@@ -84,6 +85,12 @@ $hover: darken($bg, 10%);
   background-size: cover;
   background-position: center center;
 }
+.sea-festival {
+  background-image: url(./assets/img/sea.jpg);
+  height: 400px;
+  background-size: cover;
+  background-position: center center;
+}
 .headPic-faq {
   background-image: url(./assets/img/faq-head.jpg);
   height: 300px;
@@ -101,12 +108,25 @@ $hover: darken($bg, 10%);
   height: 300px;
   background-size: cover;
   background-position: center center;
-} 
+}
 .head-title {
   color: #fff;
   font-size: 4rem;
   font-weight: 900;
   position: relative;
+}
+.campaign-title {
+  font-size: 40px;
+  padding-top: 50px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.campaign-text {
+  font-size: 18px;
+}
+.campaign-subtitle{
+  color: #000; 
+  letter-spacing: 2px;
 }
 // .head-title:before, .head-title:after {
 //   content: "";
@@ -116,16 +136,16 @@ $hover: darken($bg, 10%);
 //   width: 55%;
 //   position: absolute;
 // }
-// .head-title:before {  
+// .head-title:before {
 //   left: -70%;
 // }
-// .head-title:after {  
+// .head-title:after {
 //   right: -70%;
 // }
 // homepage
 .main-bg {
   background-image: url(./assets/img/index_visual.webp);
-  height: 600px
+  height: 600px;
 }
 // 產品頁
 .product-title {
@@ -267,22 +287,39 @@ $hover: darken($bg, 10%);
 
 //購物車
 .cart-table {
-  padding-right: 0; 
+  padding-right: 0;
   padding-left: 0;
 }
+
 .cart-table-none {
   width: 150px;
 }
+.cart-name {
+  width:40%; 
+  padding-left:20px !important;
+}
 .cart-num {
-  width: 50px;
+  width:20%;
+}
+.cart-del {
+  width:40%;
+  padding-right:30px !important;
+}
+.cart-name-pict{
+  text-align: center !important;
 }
 .cart-product-img {
-  height: 150px;
+  height: 150px !important;
+  width: 150px !important;
   background-size: cover;
   background-position: center center;
 }
 .cart-select {
-  width:70px;
+  width: 150px;
+}
+.cart-end {
+  width:30%;
+  padding-right:30px !important;
 }
 
 // checkOut
@@ -297,7 +334,7 @@ $hover: darken($bg, 10%);
   background-size: cover;
   background-position: center center;
 }
-.order-none{
+.order-none {
   width: 150px;
 }
 .form-note {
@@ -307,7 +344,7 @@ $hover: darken($bg, 10%);
 }
 // 訂單
 .order-table-100 {
-  width: 100px
+  width: 100px;
 }
 .order-table-150 {
   width: 150px;
@@ -335,7 +372,7 @@ $hover: darken($bg, 10%);
   width: 120px;
 }
 // 後台產品
-.admin-product-img {  
+.admin-product-img {
   height: 100px;
   background-size: cover;
   background-position: center;
@@ -398,7 +435,25 @@ $hover: darken($bg, 10%);
 }
 
 @media (max-width: 576px) {
-    .l-section-top {
+  .l-section-top {
     display: none;
   }
+  .cart-name {
+    width:40%; 
+    padding-left:35px !important;
+  }
+  .cart-num {
+    width:40%;
+  }
+  .cart-del {
+    width:20%;
+    padding-right:10px !important;
+  }
+  .cart-end {
+    width:20%;
+    padding-right: 5px !important;
+  }
+}
+.text-start .cart-name-pict{
+  text-align: center;
 }

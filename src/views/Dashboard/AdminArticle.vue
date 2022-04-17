@@ -114,7 +114,6 @@ export default {
       this.$http.get(url)
         .then((res) => {
           this.isLoading = true
-          console.log(res)
           this.getArticle = res.data.article
           const content = this.getArticle.content
           this.tempArticle = item
