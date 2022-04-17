@@ -145,7 +145,7 @@
         >
           <div style="color: #fff" class="text-center mt-7">
             <h2 class="campaign-title">
-              海洋夏日節
+              夏日海洋節
             </h2>
             <p class="campaign-text">
               即將到來的夏日，何不戴著我們為您精心準備了的潛水錶，盡情享受海洋的浪潮！
