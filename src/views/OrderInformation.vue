@@ -38,7 +38,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- 判斷購物車資料有沒有存在 -->
             <template v-if="cartData.carts">
               <tr v-for="item in cartData.carts" :key="item.id">
                 <td>
@@ -180,11 +179,9 @@
         </Form>
       </div>
     </div>
-    <!-- <div class="row g-7 text-center"  v-else>
-      <h2>目前購物車內沒有商品</h2>
-    </div> -->
   </div>
 </template>
+
 <script>
 import emitter from '../libs/emitter'
 export default {
@@ -247,7 +244,6 @@ export default {
             showConfirmButton: false,
             timer: 1500
           })
-          // alert(res.data.message)
           this.isLoadingItem = ''
           this.getCart()
           this.$refs.form.resetForm()
@@ -285,7 +281,6 @@ export default {
         })
     },
     showAlert (message) {
-      // Use sweetalert2
       this.$swal(message)
     }
   },

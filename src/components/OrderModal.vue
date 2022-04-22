@@ -152,11 +152,7 @@
           >
             取消
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="update"
-          >
+          <button type="button" class="btn btn-primary" @click="update">
             修改付款狀態
           </button>
         </div>
@@ -164,6 +160,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {

@@ -48,6 +48,7 @@
         </div>
       </div>
 </template>
+
 <script>
 export default {
   data () {
@@ -63,8 +64,6 @@ export default {
       const api = `${process.env.VUE_APP_API}admin/signin`
       this.$http.post(api, this.user).then((res) => {
         const { token, expired } = res.data
-        // 寫入 cookie token
-        // expires 設置有效時間
         document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`
         this.$router.push('/admin/products')
       }).catch((err) => {
@@ -75,6 +74,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 body{
   background: #fff;

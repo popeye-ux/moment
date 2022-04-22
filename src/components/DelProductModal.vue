@@ -65,12 +65,13 @@ export default {
   methods: {
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
-      this.$http.delete(url)
-        .then(res => {
+      this.$http
+        .delete(url)
+        .then((res) => {
           this.$emit('update')
           this.hideModal()
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err.data.message)
         })
     },

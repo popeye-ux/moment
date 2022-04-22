@@ -36,6 +36,9 @@ a {
 $bg: #141414;
 $text: rgba(255, 255, 255, 0.7);
 $hover: darken($bg, 10%);
+.nav-bg {
+  background:#f4f5f6;
+}
 .bottom-line {
   position: relative;
   color: inherit;
@@ -73,17 +76,16 @@ $hover: darken($bg, 10%);
     transform: scaleX(1);
   }
 }
-.headPic {
-  background-image: url(./assets/img/about-head.jpg);
+.headPic-all {
   height: 300px;
   background-size: cover;
   background-position: center center;
 }
+.headPic {
+  background-image: url(./assets/img/about-head.jpg);  
+}
 .headPic-webstore {
   background-image: url(./assets/img/webstore-head.jpg);
-  height: 300px;
-  background-size: cover;
-  background-position: center center;
 }
 .sea-festival {
   background-image: url(./assets/img/sea.jpg);
@@ -93,15 +95,9 @@ $hover: darken($bg, 10%);
 }
 .headPic-faq {
   background-image: url(./assets/img/faq-head.jpg);
-  height: 300px;
-  background-size: cover;
-  background-position: center center;
 }
 .headPic-cart {
   background-image: url(./assets/img/cart-head.jpg);
-  height: 300px;
-  background-size: cover;
-  background-position: center center;
 }
 .home-foot {
   background-image: url(./assets/img/home-foot.jpg);
@@ -128,20 +124,6 @@ $hover: darken($bg, 10%);
   color: #000; 
   letter-spacing: 2px;
 }
-// .head-title:before, .head-title:after {
-//   content: "";
-//   height: 3px;
-//   background: #ffc62d;
-//   top: 50%;
-//   width: 55%;
-//   position: absolute;
-// }
-// .head-title:before {
-//   left: -70%;
-// }
-// .head-title:after {
-//   right: -70%;
-// }
 // homepage
 .main-bg {
   background-image: url(./assets/img/index_visual.webp);
@@ -149,7 +131,8 @@ $hover: darken($bg, 10%);
 }
 // 產品頁
 .product-title {
-  min-height: 2.5rem;
+  min-height: 3rem;
+  height: 56px;
 }
 
 .add-btn {
@@ -158,52 +141,91 @@ $hover: darken($bg, 10%);
   border: #0f1d40 1px solid;
   position: relative;
   z-index: 1;
+  &:after {
+    content: "";
+    position: absolute;
+    transition: transform 0.5s ease;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #ffc62d;
+    transform: scaleX(0);
+  }
+  &:hover {
+    color: #000;
+  }
+  &:hover:after {
+      transform: scaleX(1);
+  }
 }
-.add-btn:after {
-  content: "";
-  position: absolute;
-  transition: transform 0.5s ease;
-  z-index: 2;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: #ffc62d;
-  transform: scaleX(0);
-}
-.add-btn:hover:after {
-  transform: scaleX(1);
-}
-.add-btn:hover {
-  color: #000;
-}
+// .add-btn:after {
+//   content: "";
+//   position: absolute;
+//   transition: transform 0.5s ease;
+//   z-index: 2;
+//   left: 0;
+//   bottom: 0;
+//   width: 100%;
+//   height: 100%;
+//   z-index: -1;
+//   background: #ffc62d;
+//   transform: scaleX(0);
+// }
+// .add-btn:hover:after {
+//   transform: scaleX(1);
+// }
+// .add-btn:hover {
+//   color: #000;
+// }
 
 .more-btn {
   color: #000;
   border: #848484 1px solid;
   position: relative;
   z-index: 1;
+  &:after {
+    content: "";
+    position: absolute;
+    transition: transform 0.5s ease;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #dcdcdc;
+    transform: scaleX(0);
+  }
+  &:hover:after {
+    transform: scaleX(1);
+  }
+  &n:hover {
+    color: #000;
+  }
+
 }
-.more-btn:after {
-  content: "";
-  position: absolute;
-  transition: transform 0.5s ease;
-  z-index: 2;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: #dcdcdc;
-  transform: scaleX(0);
-}
-.more-btn:hover:after {
-  transform: scaleX(1);
-}
-.more-btn:hover {
-  color: #000;
-}
+// .more-btn:after {
+//   content: "";
+//   position: absolute;
+//   transition: transform 0.5s ease;
+//   z-index: 2;
+//   left: 0;
+//   bottom: 0;
+//   width: 100%;
+//   height: 100%;
+//   z-index: -1;
+//   background: #dcdcdc;
+//   transform: scaleX(0);
+// }
+// .more-btn:hover:after {
+//   transform: scaleX(1);
+// }
+// .more-btn:hover {
+//   color: #000;
+// }
 .card:hover {
   box-shadow: 0px 0.3px 2.2px rgba(0, 0, 0, 0.02),
     0px 0.7px 5.3px rgba(0, 0, 0, 0.028), 0px 1.3px 10px rgba(0, 0, 0, 0.035),
@@ -290,7 +312,6 @@ $hover: darken($bg, 10%);
   padding-right: 0;
   padding-left: 0;
 }
-
 .cart-table-none {
   width: 150px;
 }
@@ -395,8 +416,6 @@ $hover: darken($bg, 10%);
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  // background: #fff;
-
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;

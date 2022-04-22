@@ -98,6 +98,7 @@
                   "
                 >
                   <button
+                    type="button"
                     class="btn btn-outline-primary btn-sm d-block w-100"
                     @click="tempArticle.tag.push('')"
                   >
@@ -158,6 +159,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
@@ -183,26 +185,16 @@ export default {
         tag: ['']
       },
       create_at: 0,
-      // 參考：https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/vuejs-v3.html#editor
       editor: ClassicEditor,
       editorConfig: {
         toolbar: {
-          items: [
-            'bold',
-            'italic',
-            'link',
-            'undo',
-            'redo'
-          ]
+          items: ['bold', 'italic', 'link', 'undo', 'redo']
         }
       }
     }
   },
   watch: {
     article () {
-      // 因為單向數據流的關係，所以要用深拷貝另外見一個物件來存資料
-      // this.tempArticle = JSON.parse(JSON.stringify(this.article))
-      // 這裡用了解構的方法，並加上 tag 與 isPublic 屬性，推測是如果沒設這兩個屬性，會留存之前帶入的屬性值
       this.tempArticle = {
         ...this.article,
         tag: this.article.tag || [],
@@ -233,7 +225,7 @@ export default {
         url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${tempArticle.id}`
       }
       this.$http[httpMethod](url, { data: tempArticle })
-        .then((res) => {
+        .then(() => {
           this.$emit('update-article')
           if (this.isNew) {
             alert('新增文章')

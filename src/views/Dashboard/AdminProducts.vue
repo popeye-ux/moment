@@ -1,5 +1,5 @@
 <template>
-<Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060"></Loading>
   <h2 class="text-center">這是後台產品列表</h2>
   <div class="container">
     <div class="text-end mt-4">
@@ -20,31 +20,36 @@
         </tr>
       </thead>
       <tbody>
-        <!-- 由這個 tr 開始綁定 getProducts 捉回來的 products -->
         <tr v-for="item in products" :key="item.id">
           <td class="align-middle">{{ item.category }}</td>
           <td>
-            <div class="admin-product-img"
+            <div
+              class="admin-product-img"
               :style="{ backgroundImage: `url(${item.imageUrl})` }"
             ></div>
           </td>
           <td class="align-middle">{{ item.title }}</td>
-          <td class="text-end align-middle px-5">{{ $filters.currency(item.origin_price) }}</td>
-          <td class="text-end align-middle px-5">{{ $filters.currency(item.price) }}</td>
+          <td class="text-end align-middle px-5">
+            {{ $filters.currency(item.origin_price) }}
+          </td>
+          <td class="text-end align-middle px-5">
+            {{ $filters.currency(item.price) }}
+          </td>
           <td class="align-middle">
             <button
               type="button"
               class="btn btn-light btn-act"
               :class="item.is_enabled ? 'text-success' : 'text-danger'"
-              @click="item.is_enabled = !item.is_enabled,updateProduct (item.id,item)"
+              @click="
+                (item.is_enabled = !item.is_enabled),
+                  updateProduct(item.id, item)
+              "
             >
               {{ item.is_enabled ? "啟用" : "未啟用" }}
             </button>
           </td>
-
           <td class="align-middle text-center">
             <div class="btn-group">
-              <!-- 綁定openModal(isNew, item)，isNew傳入edit -->
               <button
                 type="button"
                 class="btn btn-outline-success btn-sm"
@@ -52,7 +57,6 @@
               >
                 編輯
               </button>
-              <!-- 綁定openModal(isNew, item)，isNew傳入delete -->
               <button
                 type="button"
                 class="btn btn-outline-danger btn-sm"
@@ -67,7 +71,6 @@
         </tr>
       </tbody>
     </table>
-    <!-- props 內層:pages 外層:pagination -->
     <pagination :pages="pagination" @get-products="getData"></pagination>
   </div>
   <product-modal
@@ -76,13 +79,11 @@
     :is-new="isNew"
     @get-data="getData"
   ></product-modal>
-  <!-- 刪除產品 modal 開始 -->
   <del-product-modal
     ref="delProductModal"
     :temp-product="tempProduct"
     @update="getData"
   ></del-product-modal>
-  <!-- 刪除產品 modal 結束 -->
 </template>
 
 <script>
@@ -143,13 +144,10 @@ export default {
         }
         this.isNew = true
         this.$refs.productModal.openModal()
-        // 點擊「修改產品」，帶入的參數為 edit
       } else if (status === 'edit') {
         this.tempProduct = { ...item }
-        // if (!this.isNew) 使用put方法
         this.isNew = false
         this.$refs.productModal.openModal()
-        // 點擊「刪除產品」，帶入的參數為 delete
       }
       if (status === 'delete') {
         this.tempProduct = { ...item }

@@ -61,11 +61,9 @@
           >
         </div>
       </div>
-      <!-- col-sm-6 end -->
     </div>
   </div>
   <div class="container custom-container-width mb-5">
-    <!-- 內容開始 -->
     <div class="row mb-5 mx-4">
       <div class="col-sm-6 d-flex flex-column justify-content-center mb-6"  data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
@@ -153,11 +151,11 @@
     </div>
     <hr>
   </div>
-  <div class="container custom-container-width mt-5 mb-7">
+  <div class="container custom-container-width mt-3 mb-7">
     <div class="row mx-4">
       <div class="col-md-12" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500"><h3 class="fw-bolder">推薦商品</h3></div>
-      <div class="col-md-3" v-for="select in recommendLike" :key="select.id" data-aos="fade-up" data-aos-easing="linear"
+      <div class="col-md-3 mb-5" v-for="select in recommendLike" :key="select.id" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
         <div class="card-body">
           <img
@@ -203,6 +201,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import emitter from '../libs/emitter'
 import AOS from 'aos'

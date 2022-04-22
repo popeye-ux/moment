@@ -1,8 +1,8 @@
 <template>
-<Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060"></Loading>
   <div class="container-fluid mt-3 p-0">
     <div
-      class="d-flex align-items-center justify-content-center headPic-faq"
+      class="d-flex align-items-center justify-content-center headPic-faq headPic-all"
     >
       <span class="head-title">FAQ</span>
     </div>
@@ -401,6 +401,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data () {

@@ -21,6 +21,7 @@
     </ul>
   </nav>
 </template>
+
 <script>
 export default {
   props: ['pages'],

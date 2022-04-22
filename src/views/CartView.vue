@@ -1,7 +1,7 @@
 <template>
   <Loading :active="isLoading" :z-index="1060"></Loading>
   <div class="container-fluid mt-3 p-0">
-    <div class="headPic-cart d-flex align-items-center justify-content-center">
+    <div class="headPic-cart headPic-all d-flex align-items-center justify-content-center">
       <span class="head-title">Cart</span>
     </div>
   </div>
@@ -26,13 +26,17 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 判斷購物車資料有沒有存在 -->
           <template v-if="cartData.carts.length">
             <tr v-for="item in cartData.carts" :key="item.id">
-              <!-- 商品圖 -->
-              <!-- 商品名稱 -->
               <td class="text-start">
-                <div class="d-flex-column d-sm-flex justify-content-start align-items-center cart-name-pict">
+                <div
+                  class="
+                    d-flex-column d-sm-flex
+                    justify-content-start
+                    align-items-center
+                    cart-name-pict
+                  "
+                >
                   <div
                     class="d-sm-block cart-product-img"
                     :style="{
@@ -46,7 +50,9 @@
                 <small>單價 {{ $filters.currency(item.product.price) }}元</small
                 ><br />
                 <b>合計 {{ $filters.currency(item.total) }}元</b>
-                <div class="input-group input-group-sm text-center d-flex-row mt-2">
+                <div
+                  class="input-group input-group-sm text-center d-flex-row mt-2"
+                >
                   <div class="input-group mb-3">
                     <select
                       name=""
@@ -105,6 +111,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import emitter from '../libs/emitter'
 export default {
@@ -184,13 +191,12 @@ export default {
         showConfirmButton: true,
         showCancelButton: true
       }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           this.isLoading = true
           const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
           this.$http
             .delete(url)
-            .then((res) => {
+            .then(() => {
               this.getCart()
               emitter.emit('get-cart')
               this.isLoading = false

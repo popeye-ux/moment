@@ -1,6 +1,7 @@
 <template>
   <RouterView/>
 </template>
+
 <script>
 export default {
   data () {
@@ -14,7 +15,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
-// @import 'bootstrap/scss/bootstrap';
 @import './assets/stylesheets/all.scss';
 </style>

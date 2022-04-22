@@ -39,8 +39,8 @@
   </nav>
   <router-view v-if="checkLoginSuccess"></router-view>
 </template>
+
 <script>
-// import AdminNav from '@/components/AdminNav.vue'
 export default {
   data () {
     return {
@@ -57,11 +57,10 @@ export default {
   },
   methods: {
     checkLogin () {
-      // this.url要加上，不然沒有cookie的時候，不會導向登入頁面
       const url = `${process.env.VUE_APP_API}api/user/check`
       this.$http
         .post(url)
-        .then((res) => {
+        .then(() => {
           this.checkLoginSuccess = true
         })
         .catch((err) => {
@@ -78,6 +77,7 @@ export default {
 
 }
 </script>
+
 <style lang="scss" scoped>
 body{
   background: #fff;

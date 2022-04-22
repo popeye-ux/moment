@@ -46,12 +46,14 @@
           <td>
             <div class="btn-group">
               <button
+                type="button"
                 class="btn btn-outline-primary btn-sm"
                 @click="openCouponModal(false, item)"
               >
                 編輯
               </button>
               <button
+                type="button"
                 class="btn btn-outline-danger btn-sm"
                 @click="openDelModal(item)"
               >
@@ -75,6 +77,7 @@
     ></del-coupon-modal>
   </div>
 </template>
+
 <script>
 import couponModal from '@/components/CouponModal.vue'
 import delCouponModal from '@/components/DelCoupon.vue'

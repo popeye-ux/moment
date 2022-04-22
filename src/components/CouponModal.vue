@@ -99,6 +99,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {
@@ -134,7 +135,7 @@ export default {
       const dateAndTime = new Date(this.tempCoupon.due_date * 1000)
         .toISOString()
         .split('T');
-      [this.due_date] = dateAndTime // 因為單向數據流的關係，所以要用深拷貝另外見一個物件來存資料
+      [this.due_date] = dateAndTime
     },
     due_date () {
       this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)

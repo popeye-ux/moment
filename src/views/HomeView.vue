@@ -173,11 +173,15 @@
             },
             '768': {
               slidesPerView: 2,
-              spaceBetween: 30,
+              spaceBetween: 10,
             },
-            '1024': {
+            '992': {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+            '1200': {
               slidesPerView: 4,
-              spaceBetween: 30,
+              spaceBetween: 10,
             },
           }"
           :loop = "true"
@@ -354,7 +358,6 @@ export default {
       this.showAlert({ icon: 'success', title: '訂閱成功' })
     },
     showAlert (message) {
-      // Use sweetalert2
       this.$swal(message)
     }
   },
@@ -365,6 +368,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 @import "@/assets/stylesheets/helpers/swiper.scss";
 @import "@/assets/stylesheets/helpers/pagination.scss";

@@ -1,14 +1,12 @@
 <template>
 <Loading :active="isLoading" :z-index="1060"></Loading>
  <div class="container-fluid mt-3 p-0">
-    <div class="headPic-webstore d-flex align-items-center justify-content-center">
+    <div class="headPic-webstore headPic-all d-flex align-items-center justify-content-center">
       <span class="head-title">Webstore</span>
     </div>
   </div>
   <div class="container wrapper mt-7">
-    <!-- row 決定內層的欄位數量 -->
     <div class="row row-cols-1 row-cols-sm-2  row-cols-lg-4 mx-1 mx-lg-4">
-      <!-- 內層不決定寬度 -->
       <div class="col mb-6" v-for="item in products" :key="item.id" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
      <router-link :to="`/product/${item.id}`">
@@ -51,14 +49,13 @@
       </div>
     </div>
   </div>
-
   <div class="container mt-3 mb-7">
     <div class="row">
-      <!-- props 內層:pages 外層:pagination -->
       <pagination :pages="pagination" @get-products="getData"></pagination>
     </div>
   </div>
 </template>
+
 <script>
 import emitter from '../libs/emitter'
 import pagination from '@/components/PaginationComp.vue'
@@ -98,7 +95,6 @@ export default {
         .then((res) => {
           if (data.qty <= 0) {
             alert('數量必須大於0')
-            // this.isLoadingItem = '';
             return
           }
           this.isLoadingItem = ''
@@ -116,7 +112,6 @@ export default {
         })
     },
     showAlert (message) {
-      // Use sweetalert2
       this.$swal(message)
       AOS.init()
     }

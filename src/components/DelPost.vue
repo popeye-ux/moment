@@ -65,13 +65,14 @@ export default {
   methods: {
     delPost () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`
-      this.$http.delete(url)
-        .then(res => {
+      this.$http
+        .delete(url)
+        .then((res) => {
           this.$emit('update')
           this.hideModal()
           alert('文章已刪除')
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err)
         })
     },

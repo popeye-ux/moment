@@ -1,10 +1,14 @@
 const newLocal=getPosts()
 <template>
- <Loading :active="isLoading" :z-index="1060"></Loading>
+  <Loading :active="isLoading" :z-index="1060"></Loading>
   <h1 class="text-center">這是文章管理介面</h1>
   <div class="container">
-       <div class="text-end mt-4">
-      <button class="btn btn-primary" type="button" @click="openArticleModal(true)">
+    <div class="text-end mt-4">
+      <button
+        class="btn btn-primary"
+        type="button"
+        @click="openArticleModal(true)"
+      >
         建立新的頁面
       </button>
     </div>
@@ -35,17 +39,25 @@ const newLocal=getPosts()
                 @change="updatePost(item)"
               />
               <label class="form-check-label" :for="`${item.id}`">
-                <span v-if="item.isPublic===true">上架</span>
+                <span v-if="item.isPublic === true">上架</span>
                 <span v-else>未上架</span>
               </label>
             </div>
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" type="button" @click="openArticleModal(false, item)">
+              <button
+                class="btn btn-outline-primary btn-sm"
+                type="button"
+                @click="openArticleModal(false, item)"
+              >
                 編輯
               </button>
-              <button class="btn btn-outline-danger btn-sm" type="button" @click="openDelModal(item)">
+              <button
+                class="btn btn-outline-danger btn-sm"
+                type="button"
+                @click="openDelModal(item)"
+              >
                 刪除
               </button>
             </div>
@@ -56,17 +68,18 @@ const newLocal=getPosts()
     <pagination :pages="pagination" @emit-pages="getPosts"></pagination>
   </div>
   <post-modal
-      :article="tempArticle"
-      :is-new="isNew"
-      ref="postModal"
-      @update-article="getPosts"
-    ></post-modal>
-    <del-post
-      ref="delPost"
-      :temp-article="tempArticle"
-      @update="getPosts"
-    ></del-post>
+    :article="tempArticle"
+    :is-new="isNew"
+    ref="postModal"
+    @update-article="getPosts"
+  ></post-modal>
+  <del-post
+    ref="delPost"
+    :temp-article="tempArticle"
+    @update="getPosts"
+  ></del-post>
 </template>
+
 <script>
 import pagination from '@/components/PaginationComp.vue'
 import PostModal from '@/components/PostModal.vue'
@@ -99,7 +112,8 @@ export default {
       this.isLoading = true
       this.nowPage = page
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}`
-      this.$http.get(url)
+      this.$http
+        .get(url)
         .then((res) => {
           this.posts = res.data.articles
           this.pagination = res.data.pagination
@@ -111,18 +125,19 @@ export default {
     },
     updatePost (item) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${item.id}`
-      this.$http.get(url)
+      this.$http
+        .get(url)
         .then((res) => {
           this.isLoading = true
           this.getArticle = res.data.article
           const content = this.getArticle.content
           this.tempArticle = item
           this.tempArticle.content = content
-          this.$http.put(url, { data: this.tempArticle })
+          this.$http
+            .put(url, { data: this.tempArticle })
             .then((res) => {
               this.isLoading = false
               this.showAlert({ icon: 'success', title: `${res.data.message}` })
-              // alert(res.data.message)
             })
             .catch((err) => {
               alert(err)
@@ -142,7 +157,8 @@ export default {
         }
       } else {
         const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${item.id}`
-        this.$http.get(url)
+        this.$http
+          .get(url)
           .then((res) => {
             this.tempArticle = res.data.article
           })

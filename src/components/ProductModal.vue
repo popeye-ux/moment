@@ -41,7 +41,6 @@
               <div class="row">
                 <div class="mb-3 col-md-6">
                   <div class="form-floating">
-                    <!-- v-model 綁定 tempProduct.category -->
                     <input
                       id="category"
                       type="text"
@@ -54,7 +53,6 @@
                 </div>
                 <div class="mb-3 col-md-6">
                   <div class="form-floating">
-                    <!-- v-model 綁定 tempProduct.unit -->
                     <input
                       id="unit"
                       type="text"
@@ -69,8 +67,6 @@
 
               <div class="row">
                 <div class="mb-3 col-md-6">
-                  <!-- 產品原價 -->
-                  <!-- v-model 綁定 tempProduct.origin_price -->
                   <div class="form-floating">
                     <input
                       id="origin_price"
@@ -84,8 +80,6 @@
                   </div>
                 </div>
                 <div class="mb-3 col-md-6">
-                  <!-- 產品售價 -->
-                  <!-- v-model 綁定 tempProduct.price -->
                   <div class="form-floating">
                     <input
                       id="price"
@@ -100,64 +94,59 @@
                 </div>
               </div>
               <hr />
-              <!-- 產品規格 -->
-              <!-- v-model 綁定 tempProduct.movement 機芯 -->
               <div class="row">
-              <div class="mb-3 col-md-6">
-                <div class="form-floating">
-                  <input
-                    id="movement"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入機心規格"
-                    v-model="tempProduct.movement"
-                  />
-                  <label for="movement" class="form-label">動力</label>
+                <div class="mb-3 col-md-6">
+                  <div class="form-floating">
+                    <input
+                      id="movement"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入機心規格"
+                      v-model="tempProduct.movement"
+                    />
+                    <label for="movement" class="form-label">動力</label>
+                  </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                  <div class="form-floating">
+                    <input
+                      id="size"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入錶面直徑"
+                      v-model="tempProduct.size"
+                    />
+                    <label for="size" class="form-label">錶面直徑</label>
+                  </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                  <div class="form-floating">
+                    <input
+                      id="water"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入售價"
+                      v-model="tempProduct.water"
+                    />
+                    <label for="water" class="form-label">防水</label>
+                  </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                  <div class="form-floating">
+                    <input
+                      id="functions"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入功能"
+                      v-model="tempProduct.functions"
+                    />
+                    <label for="functions" class="form-label">功能</label>
+                  </div>
                 </div>
               </div>
-              <!-- v-model 綁定 tempProduct.movement 機芯 -->
-              <div class="mb-3 col-md-6">
-                <div class="form-floating">
-                  <input
-                    id="size"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入錶面直徑"
-                    v-model="tempProduct.size"
-                  />
-                  <label for="size" class="form-label">錶面直徑</label>
-                </div>
-              </div>
-              <div class="mb-3 col-md-6">
-                <div class="form-floating">
-                  <input
-                    id="water"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入售價"
-                    v-model="tempProduct.water"
-                  />
-                  <label for="water" class="form-label">防水</label>
-                </div>
-              </div>
-              <div class="mb-3 col-md-6">
-                <div class="form-floating">
-                  <input
-                    id="functions"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入功能"
-                    v-model="tempProduct.functions"
-                  />
-                  <label for="functions" class="form-label">功能</label>
-                </div>
-              </div>
-              </div>
-              <!-- 產品規格結束 -->
               <hr />
               <div class="mb-3">
                 <div class="form-floating">
-                  <!-- v-model 綁定 tempProduct.description -->
                   <textarea
                     id="description"
                     type="text"
@@ -170,7 +159,6 @@
               </div>
               <div class="mb-3">
                 <div class="form-floating">
-                  <!-- v-model 綁定 tempProduct.content -->
                   <textarea
                     id="content"
                     type="text"
@@ -183,7 +171,6 @@
               </div>
               <div class="mb-3">
                 <div class="form-floating">
-                  <!-- v-model 綁定 tempProduct.content -->
                   <textarea
                     id="story1"
                     type="text"
@@ -196,7 +183,6 @@
               </div>
               <div class="mb-3">
                 <div class="form-floating">
-                  <!-- v-model 綁定 tempProduct.content -->
                   <textarea
                     id="others"
                     type="text"
@@ -247,9 +233,7 @@
                     :false-value="0"
                     v-model="tempProduct.sale"
                   />
-                  <label class="form-check-label" for="sale"
-                    >行銷活動</label
-                  >
+                  <label class="form-check-label" for="sale">行銷活動</label>
                 </div>
               </div>
             </div>
@@ -264,6 +248,7 @@
                   @change="upload('main', $event)"
                 /><img class="img-fluid" :src="tempProduct.imageUrl" />
                 <button
+                  type="button"
                   class="btn btn-outline-danger btn-sm d-block w-100"
                   v-if="tempProduct.imageUrl"
                   @click="tempProduct.imageUrl = ''"
@@ -271,7 +256,6 @@
                   刪除檔案
                 </button>
               </div>
-              <!-- 多圖設置 file選擇檔案 -->
               <div class="mb-3">
                 <div v-if="Array.isArray(tempProduct.imagesUrl)">
                   <label for="uploadImgs" class="form-label">多圖設置</label>
@@ -295,6 +279,7 @@
                       :src="tempProduct.imagesUrl[index]"
                     />
                     <button
+                      type="button"
                       class="btn btn-outline-danger btn-sm d-block w-100 mb-3"
                       @click="tempProduct.imagesUrl.splice(index, 1)"
                     >
@@ -314,7 +299,6 @@
                 </div>
               </div>
             </div>
-            <!-- button end -->
           </div>
         </div>
         <div class="modal-footer">
@@ -325,11 +309,7 @@
           >
             取消
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="updateProduct"
-          >
+          <button type="button" class="btn btn-primary" @click="updateProduct">
             確認
           </button>
         </div>
@@ -351,7 +331,7 @@ export default {
   },
   watch: {
     product () {
-      this.tempProduct = JSON.parse(JSON.stringify(this.product)) // 因為單向數據流的關係，所以要用深拷貝另外一個物件來存資料
+      this.tempProduct = JSON.parse(JSON.stringify(this.product))
     }
   },
   mounted () {
@@ -371,7 +351,6 @@ export default {
       this.$http[http](url, { data: this.tempProduct })
         .then((response) => {
           alert(response.data.message)
-          // this.getProducts(); 這裡沒有getProducts()--外層的方法
           this.$emit('get-data')
           this.modal.hide()
         })

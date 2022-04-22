@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light mt-3 sticky-top" id="nav">
+  <nav class="navbar navbar-expand-lg navbar-light mt-3 sticky-top nav-bg" id="nav">
     <div class="container-fluid">
-      <router-link to="/" class="navbar-brand ms-lg-5">
+      <router-link to="/" class="navbar-brand ms-lg-5" @click="closeNavHam">
         <svg
           version="1.1"
           id="Layer_1"
@@ -53,11 +53,6 @@
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
         @click="toggleNavHam"
       >
         <span class="navbar-toggler-icon"></span>
@@ -124,14 +119,23 @@
                 >
                   <i class="bi bi-bag-fill align-middle"></i>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-end rounded-3">
-                  <li> <p class="px-2 fw-normal text-center text-muted mb-0 pb-2">目前沒有商品喔</p></li>
+                <ul
+                  class="
+                    dropdown-menu dropdown-menu-end dropdown-menu-end
+                    rounded-3
+                  "
+                >
+                  <li>
+                    <p class="px-2 fw-normal text-center text-muted mb-0 pb-2">
+                      目前沒有商品喔
+                    </p>
+                  </li>
                   <li class="d-flex justify-content-center">
                     <router-link
                       to="/products"
                       class="btn btn-primary btn-sm dropdownBtn rounded-3"
                       type="button"
-                       @click="closeNavHam"
+                      @click="closeNavHam"
                     >
                       <p class="text-white mb-0">購物去</p>
                     </router-link>
@@ -145,17 +149,7 @@
     </div>
   </nav>
 </template>
-<style lang="scss" scoped>
-svg {
-  width: 140px;
-}
-.logo-black {
-  fill: #0e0e0e;
-}
-.logo-yellow {
-  fill: #ffad2d;
-}
-</style>
+
 <script>
 import emitter from '@/libs/emitter'
 import closeNavMixins from '@/mixins/closeNavMixins'
@@ -192,3 +186,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  svg {
+    width: 140px;
+  }
+  .logo-black {
+    fill: #0e0e0e;
+  }
+  .logo-yellow {
+    fill: #ffad2d;
+  }
+</style>

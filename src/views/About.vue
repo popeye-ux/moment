@@ -1,11 +1,11 @@
 <template>
-<!-- <Loading :active="isLoading" :z-index="1060"></Loading> -->
+  <Loading :active="isLoading" :z-index="1060"></Loading>
   <div class="container-fluid mt-3 p-0">
-    <div class="headPic d-flex align-items-center justify-content-center">
+    <div class="headPic headPic-all d-flex align-items-center justify-content-center">
       <span class="head-title">About</span>
     </div>
   </div>
-  <div class="container my-6">
+  <div class="container my-4 my-lg-6">
     <div class="row p-5 mb-5 text-center mx-1 mx-lg-4">
       <h2 class="fw-bolder" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">時間是偉大的作者，它會給每個人寫出完美的結局</h2>
@@ -67,6 +67,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import AOS from 'aos'
 export default {

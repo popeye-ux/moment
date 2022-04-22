@@ -50,7 +50,7 @@
   </div>
   <div class="container my-7">
     <div class="row" :class="order.is_paid ? 'justify-content-center' : ''">
-      <div class="col col-sm-6" v-if="!order.is_paid">
+      <div class="col-12 col-sm-6" v-if="!order.is_paid">
         <h3 class="fw-bold">訂購商品</h3>
         <table class="table">
           <thead>
@@ -88,7 +88,7 @@
           </tfoot>
         </table>
       </div>
-      <div class="col col-sm-6">
+      <div class="col-12 col-sm-6">
         <h3 class="fw-bold">
           訂單資訊<span class="fw-normal fs-5 text-danger"
             >({{ order.is_paid ? "已付款" : "未付款" }})</span
@@ -156,6 +156,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data () {
@@ -199,7 +200,6 @@ export default {
       })
     },
     showAlert (message) {
-      // Use sweetalert2
       this.$swal(message)
     }
   },
