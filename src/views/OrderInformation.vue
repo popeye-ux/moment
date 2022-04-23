@@ -111,7 +111,6 @@
               class="invalid-feedback"
             ></ErrorMessage>
           </div>
-
           <div class="mb-3">
             <label for="name" class="form-label">收件人姓名<span class="form-note">*</span></label>
             <Field
@@ -126,7 +125,6 @@
             ></Field>
             <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
           </div>
-
           <div class="mb-3">
             <label for="tel" class="form-label">收件人電話<span class="form-note">*</span></label>
             <Field
@@ -141,7 +139,6 @@
             ></Field>
             <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
           </div>
-
           <div class="mb-3">
             <label for="address" class="form-label">收件人地址<span class="form-note">*</span></label>
             <Field

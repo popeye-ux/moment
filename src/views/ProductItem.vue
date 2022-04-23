@@ -90,7 +90,8 @@
         <p class="lh-lg">{{ productDetail.others }}</p>
       </div>
     </div>
-    <hr />
+    <hr  data-aos="fade-up" data-aos-easing="linear"
+     data-aos-duration="1500"/>
     <div class="row mt-2 align-items-start gy-5 mx-4" >
       <div class="col-sm-4" data-aos="fade-up" data-aos-easing="linear"
      data-aos-duration="1500">
@@ -149,7 +150,8 @@
         </p>
       </div>
     </div>
-    <hr>
+    <hr data-aos="fade-up" data-aos-easing="linear"
+     data-aos-duration="1500" />
   </div>
   <div class="container custom-container-width mt-3 mb-7">
     <div class="row mx-4">
